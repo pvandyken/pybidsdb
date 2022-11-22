@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "pybidsdb"
+version = "0.1.0"
+description = "Pybids Database generation on AllianceCan Clusters"
+authors = ["Peter Van Dyken <pvandyk2@uwo.ca>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<=3.11"
+pybids = "^0.15"
+typer = "^0.7.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+isort = "^5.10.1"
+flake8 = "^5.0.4"
+pylint = "^2.15.6"
+
+[tool.poetry.scripts]
+pybidsdb = 'pybidsdb.main:app'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
