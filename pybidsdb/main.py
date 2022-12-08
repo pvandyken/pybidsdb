@@ -50,7 +50,7 @@ def main(
         )
         exit(1)
     print(f"Writing database to {tmpdir}")
-    BIDSLayout(".", derivatives=derivatives, database_path=tmpdir, validate=validate)
+    BIDSLayout(path, derivatives=derivatives, database_path=tmpdir, validate=validate)
 
     print(f"Moving to {final}")
     shutil.move(str(tmpdir), stagedir)
