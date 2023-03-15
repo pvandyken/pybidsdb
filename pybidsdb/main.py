@@ -1,12 +1,12 @@
 import os
 import shutil
+import subprocess as sp
 import sys
 import tempfile as tmp
 from pathlib import Path
 
 import typer
 from bids import BIDSLayout
-
 from rich.console import Console
 
 err = Console(stderr=True)
@@ -23,13 +23,20 @@ def main(
     ),
     folder: str = typer.Option(".pybids", help="Name of database folder"),
 ):
+    try:
+        sp.check_call(["which", "srun", "||", "which", "sbatch"])
+        slurm_avail = True
+    except sp.CalledProcessError:
+        slurm_avail = False
+
     if "SLURM_TMPDIR" in os.environ:
         tmpdir = Path(os.environ["SLURM_TMPDIR"]) / ".pybids"
         tmpdir.mkdir()
     else:
-        if not force:
+        if slurm_avail and not force:
             err.print(
-                "This command must be run on a compute node (use --force to run anyway)",
+                "This command should be run on a compute node (use --force to run "
+                "anyway)",
                 style="red1",
             )
             exit(1)
