@@ -24,7 +24,8 @@ def main(
     folder: str = typer.Option(".pybids", help="Name of database folder"),
 ):
     try:
-        sp.check_call(["which", "srun", "||", "which", "sbatch"])
+        sp.check_call(["which", "srun"])
+        sp.check_call(["which", "sbatch"])
         slurm_avail = True
     except sp.CalledProcessError:
         slurm_avail = False
