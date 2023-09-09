@@ -8,7 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.12"
-pybids = "^0.15"
+pybids = ">=0.16"
 typer = {extras = ["all"], version = "^0.7.0"}
 
 [tool.poetry.group.dev.dependencies]
