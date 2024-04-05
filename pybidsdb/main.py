@@ -6,7 +6,7 @@ import tempfile as tmp
 from pathlib import Path
 
 import typer
-from bids import BIDSLayout
+from bids import BIDSLayout, BIDSLayoutIndexer
 from rich.console import Console
 
 err = Console(stderr=True)
@@ -58,7 +58,13 @@ def main(
         )
         exit(1)
     print(f"Writing database to {tmpdir}")
-    BIDSLayout(path, derivatives=derivatives, database_path=tmpdir, validate=validate)
+    BIDSLayout(
+        path,
+        derivatives=derivatives,
+        database_path=tmpdir,
+        validate=validate,
+        indexer=BIDSLayoutIndexer(index_metadata=False),
+    )
 
     print(f"Moving to {final}")
     shutil.move(str(tmpdir), stagedir)
